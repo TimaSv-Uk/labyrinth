@@ -12,8 +12,8 @@ function App() {
     doorBottomLocked: false,
     doorRightLocked: true,
     doorLeftLocked: false,
-    rightNode: 2,
-    bottomNode: 3,
+    rightNodeId: 2,
+    bottomNodeId: 3,
   };
 
   const node2: GameNode = {
@@ -26,8 +26,8 @@ function App() {
     doorBottomLocked: false,
     doorRightLocked: false,
     doorLeftLocked: false,
-    leftNode: 1,
-    bottomNode: 4,
+    leftNodeId: 1,
+    bottomNodeId: 4,
   };
 
   const node3: GameNode = {
@@ -41,8 +41,8 @@ function App() {
     doorBottomLocked: false,
     doorRightLocked: false,
     doorLeftLocked: false,
-    topNode: 1,
-    rightNode: 4,
+    topNodeId: 1,
+    rightNodeId: 4,
   };
 
   const node4: GameNode = {
@@ -51,24 +51,21 @@ function App() {
     doorBottomVisible: false,
     doorRightVisible: false,
     doorLeftVisible: true,
-
     doorTopLocked: false,
     doorBottomLocked: false,
     doorRightLocked: false,
     doorLeftLocked: false,
-    topNode: 2,
-    leftNode: 3,
+    topNodeId: 2,
+    leftNodeId: 3,
   };
 
   const nodes = [node1, node2, node3, node4];
   let currentNode = node1;
   const destinationNode = node4;
-  const [graph, setGraph] = useState<Graph>({
-    nodes,
-    currentNodeId: currentNode.id,
-    destinationNodeId: destinationNode.id,
-  });
-
+  const [graph, setGraph] = useState<Graph>(
+    new Graph(nodes, currentNode.id, destinationNode.id),
+  );
+  console.log(graph.canReachDestination());
   const toggleBorder = (
     event: React.MouseEvent<HTMLDivElement>,
     node: GameNode,
@@ -80,31 +77,46 @@ function App() {
     if (node.id !== graph.currentNodeId) {
       return;
     }
-    if (moveDirection.includes("top") && !node.doorTopLocked) {
-      nextCurrentNodeId = node.topNode;
-    } else if (moveDirection.includes("left") && !node.doorLeftLocked) {
-      nextCurrentNodeId = node.leftNode;
-    } else if (moveDirection.includes("right") && !node.doorRightLocked) {
-      nextCurrentNodeId = node.rightNode;
-    } else if (moveDirection.includes("bottom") && !node.doorBottomLocked) {
-      nextCurrentNodeId = node.bottomNode;
+    if (moveDirection.includes("top") && !node.doorTopLocked && node.topNodeId) {
+      nextCurrentNodeId = node.topNodeId;
+    } else if (
+      moveDirection.includes("left") &&
+      !node.doorLeftLocked &&
+      node.leftNodeId
+    ) {
+      nextCurrentNodeId = node.leftNodeId;
+    } else if (
+      moveDirection.includes("right") &&
+      !node.doorRightLocked &&
+      node.rightNodeId
+    ) {
+      nextCurrentNodeId = node.rightNodeId;
+    } else if (
+      moveDirection.includes("bottom") &&
+      !node.doorBottomLocked &&
+      node.bottomNodeId
+    ) {
+      nextCurrentNodeId = node.bottomNodeId;
     } else {
-      console.log(border, currentNode);
       return;
     }
     const updatedNode = {
       ...node,
-      [border]: !node[border],
+      // [border]: !node[border],
+      [border]: false,
     };
-
+    
     const updatedNodes = graph.nodes.map((n) =>
       n.id === node.id ? updatedNode : n,
     );
-    setGraph((prevGraph) => ({
-      ...prevGraph,
-      nodes: updatedNodes,
-      currentNodeId: nextCurrentNodeId ?? prevGraph.currentNodeId,
-    }));
+    setGraph(
+      (prevGraph) =>
+        new Graph(
+          updatedNodes,
+          nextCurrentNodeId ?? prevGraph.currentNodeId,
+          prevGraph.destinationNodeId,
+        ),
+    );
   };
   return (
     <div className="grid grid-cols-2 grid-flow-row-dense">
