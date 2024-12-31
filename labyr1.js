@@ -6,14 +6,16 @@ class GameNode {
 	neighbour_nodes = []
 
 	/**
-	 * @param {number} node_id
-	 * @param {boolean} is_start
-	 * @param {boolean} is_destination
+	 * @type {number}
 	 * */
-	constructor(node_id, is_start, is_destination) {
+	node_id;
+
+
+	/**
+	 * @param {number} node_id
+	 * */
+	constructor(node_id) {
 		this.node_id = node_id;
-		this.is_start = is_start;
-		this.is_destination = is_destination;
 	}
 
 
@@ -32,56 +34,68 @@ class GameNode {
 class GameGrid {
 	/**
 	 *
-	 * @type {Array<GameNode>} nodes
+	 * @type {Array<GameNode>} 
 	 * */
 	nodes;
+
+	/**
+	 *
+	 * @type {number} 
+	 * */
+	current_node_id;
+
+	/**
+	 *
+	 * @type {number} 
+	 * */
+	start_node_id;
+
+	/**
+	 *
+	 * @type {number} 
+	 * */
+	destinations_node_id;
+
 	/**
 	 *
 	 * @param {Array<GameNode>} nodes
+	 * @param {number} start_node_id
+	 * @param {number} destinations_node_id
 	 * */
-	constructor(nodes) {
-		if (this.is_valid_sells(nodes)) {
+	constructor(nodes, start_node_id, destinations_node_id) {
+
+		if (this.is_valid_nodes(nodes)) {
 			this.nodes = nodes
 		}
+
+		if (!nodes.find((node) => node.node_id === start_node_id)) {
+			throw new Error("there is no node with currentNodeId in nodes");
+		}
+		if (!nodes.find((node) => node.node_id === destinations_node_id)) {
+			throw new Error("there is no node with destinationNodeId in nodes");
+		}
+		this.start_node_id = start_node_id;
+		this.current_node_id = start_node_id;
+		this.destinations_node_id = destinations_node_id;
+
 	}
 	/**
 	 *
 	 * @param {Array<GameNode>} nodes
 	 * */
-	is_valid_sells(nodes) {
+	is_valid_nodes(nodes) {
 
-		let number_of_starts = 0;
-		let number_of_destinations = 0;
 		let ids_seen = new Set();
 		let duplicate_ids = new Set();
 
 		nodes.forEach((node) => {
-			if (node.is_start) {
-				number_of_starts++;
-			}
-			if (node.is_destination) {
-				number_of_destinations++;
-			}
-
 			if (ids_seen.has(node.node_id)) {
 				duplicate_ids.add(node.node_id);
 			} else {
 				ids_seen.add(node.node_id);
 			}
-
 		})
 		const errors = [];
-		if (number_of_starts === 0) {
-			errors.push("No start node in nodes.");
-		} else if (number_of_starts > 1) {
-			errors.push("There can be only one start node in nodes.");
-		}
-
-		if (number_of_destinations === 0) {
-			errors.push("No destination node in nodes.");
-		} else if (number_of_destinations > 1) {
-			errors.push("There can be only one destination node in nodes.");
-		}
 
 		if (duplicate_ids.size > 0) {
 			errors.push(`Duplicate IDs found: ${Array.from(duplicate_ids).join(", ")}`);
@@ -95,10 +109,12 @@ class GameGrid {
 	}
 
 }
-
-
-function render_nodes(nodes, element_to_append = "body") {
-
+/**
+ * @param {GameGrid} game 
+ * @param {string} element_to_append 
+ * */
+function render_nodes(game, element_to_append = "body") {
+	let nodes = game.nodes;
 	const grid = document.createElement("div");
 	grid.id = "grid";
 
@@ -106,18 +122,19 @@ function render_nodes(nodes, element_to_append = "body") {
 	let cols = Math.floor(Math.sqrt(nodes.length));
 	grid.style.gridTemplateColumns = `repeat(${cols}, auto)`;
 
+
 	nodes.sort((node1, node2) => node1.node_id - node2.node_id).forEach((nodeData, id) => {
 		let html_node = document.createElement("div");
 		html_node.classList.add("node");
 		html_node.id = nodeData.node_id;
 
-		if (nodeData.is_start) {
+		if (nodeData.node_id === game.start_node_id) {
 			html_node.classList.add("current");
 			html_node.classList.add("start");
 
 			html_node.innerText = "Start";
 		}
-		if (nodeData.is_destination) {
+		if (nodeData.node_id === game.destinations_node_id) {
 			html_node.classList.add("destination");
 			html_node.innerText = "Destination";
 		}
@@ -197,7 +214,8 @@ let nodes = [
 	new GameNode(8, false, false),
 	new GameNode(9, false, true),
 ];
-let game = new GameGrid(nodes);
+let game = new GameGrid(nodes, 1, 9);
 
-render_nodes(game.nodes, "body");
+render_nodes(game, "body");
+
 select_walls_start(node_selector = ".node", max_closed_walls = 10);
