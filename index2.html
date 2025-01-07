@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Labyr</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="labyr1.js" defer></script>
+  <style type="text/css" id="style">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #grid {
+      width: fit-content;
+      border-collapse: collapse;
+      display: grid;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .neighbour_path {
+      width: 100px;
+      border: 1px solid;
+      border-radius: 5px;
+    }
+
+    .node {
+      position: relative;
+      margin: 10px;
+      padding: 10px;
+      width: 300px;
+      height: 300px;
+      /* border-bottom: 10px solid black; */
+      /* border-right: 10px solid black; */
+      border: solid 10px black;
+      display: flex;
+      flex-grow: 1;
+    }
+
+    .destination {
+      background: red;
+      color: white;
+    }
+
+
+    .start {
+      background: green;
+      color: white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      /* 4 columns */
+      gap: 0;
+      /* No gaps, borders handle spacing */
+      border: 1px solid black;
+      /* Outer border */
+    }
+
+    .grid-item {
+      border-bottom: 5px solid black;
+      border-right: 5px solid black;
+    }
+
+    /* Remove duplicate borders for last row and column */
+    .grid-item:last-child,
+    .grid-item:nth-child(4n) {
+      border-right: none;
+    }
+
+    .grid-item:nth-last-child(-n + 4) {
+      border-bottom: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid">
+    <!-- Repeat for grid items -->
+    <div class="grid-item">1</div>
+    <div class="grid-item">2</div>
+    <div class="grid-item">3</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">5</div>
+    <div class="grid-item">6</div>
+    <div class="grid-item">7</div>
+    <div class="grid-item">8</div>
+    <div class="grid-item">9</div>
+    <div class="grid-item">10</div>
+    <div class="grid-item">11</div>
+    <div class="grid-item">12</div>
+  </div>
+  <div id="grid">
+    <!-- <div class="node" data-start="true" data-current="true"></div> -->
+    <!-- <div class="node" ></div> -->
+    <!-- <div class="node"></div> -->
+    <!-- <div class="node" data-destination="true"></div> -->
+  </div>
+
+
+  <div style="margin-top: 10px;">
+    <label>Select max number of looked walls</label>
+    <input type="text" id="name" name="name" required minlength="4" maxlength="8" size="10"
+      style="border: 1px solid black; padding: 5px;" />
+  </div>
+  <div></div>
+
+</body>
+
+
+</html>
