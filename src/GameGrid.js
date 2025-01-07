@@ -26,8 +26,8 @@ export class GameGrid {
 	destination_node_id;
 
 	/**
-	 *
-	 * @type {number[]}
+	 * move from node_id to node_id on each move
+	 * @type {[[number,number]]}
 	 * */
 	player_path;
 
@@ -51,7 +51,8 @@ export class GameGrid {
 		this.start_node_id = start_node_id;
 		this.current_node_id = start_node_id;
 		this.destination_node_id = destination_node_id;
-		this.player_path = [start_node_id];
+
+		this.player_path = [[start_node_id, start_node_id]];
 
 	}
 	/**

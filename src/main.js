@@ -85,7 +85,8 @@ function move_by_button(game) {
       if (game.can_move_from_to(selected_node_id, next_node_id)) {
 
         game.current_node_id = next_node_id;
-        game.player_path = [...game.player_path, next_node_id];
+        game.player_path = [...game.player_path, [selected_node_id, next_node_id]];
+        console.log(game.player_path)
 
         //NOTE: to rerender game board and attach EventListener
         render_nodes(game, "body");
