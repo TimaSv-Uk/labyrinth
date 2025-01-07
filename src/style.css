@@ -31,6 +31,11 @@ body {
   gap: 10px;
 }
 
+
+.path_closed{
+  background: red;
+}
+
 .neighbour_path {
   width: 100px;
   border: 1px solid;

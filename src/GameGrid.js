@@ -27,6 +27,12 @@ export class GameGrid {
 
 	/**
 	 *
+	 * @type {number[]}
+	 * */
+	player_path;
+
+	/**
+	 *
 	 * @param {Array<GameNode>} nodes
 	 * @param {number} start_node_id
 	 * @param {number} destination_node_id
@@ -45,6 +51,7 @@ export class GameGrid {
 		this.start_node_id = start_node_id;
 		this.current_node_id = start_node_id;
 		this.destination_node_id = destination_node_id;
+		this.player_path = [start_node_id];
 
 	}
 	/**
@@ -85,6 +92,23 @@ export class GameGrid {
 	 */
 	find_node(node_id) {
 		return this.nodes.find(node => node.node_id === node_id);
+	}
+
+	/**
+	 * @param {number} selected_node_id
+	 * @param {number} next_node_id
+	 * @returns {boolean}
+	 */
+	can_move_from_to(selected_node_id, next_node_id) {
+		console.log(this.find_node(selected_node_id)
+			.neighbour_nodes
+			.find(node => node.neighbour_node_id === next_node_id && node.accessable))
+		if (this.find_node(selected_node_id)
+			.neighbour_nodes
+			.find(node => node.neighbour_node_id === next_node_id && node.accessable)) {
+			return true
+		}
+		return false;
 	}
 
 	/**
