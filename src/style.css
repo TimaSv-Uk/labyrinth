@@ -32,8 +32,12 @@ body {
 }
 
 
-.path_closed{
+.path_closed {
   background: red;
+}
+
+.visited {
+  background: blue;
 }
 
 .neighbour_path {
@@ -65,6 +69,7 @@ body {
   /* background: yellow; */
   border: solid 10px blue;
 }
+
 
 .start {
   background: green;

@@ -32,11 +32,22 @@ function render_nodes(game, element_to_append = "body") {
     html_node.id = nodeData.node_id;
     html_node.innerText = `NodeId: ${nodeData.node_id};`;
     nodeData.neighbour_nodes.forEach((neighbour) => {
-
       let neighbour_path = document.createElement("button");
       neighbour_path.classList.add("neighbour_path");
       neighbour_path.id = `${neighbour.neighbour_node_id}`;
       neighbour_path.innerText = `path to: ${neighbour.neighbour_node_id} -- ${neighbour.accessable}`;
+
+
+      let visited_from_to = game.player_path.find((path) => path[0] === nodeData.node_id && path[1] === neighbour.neighbour_node_id);
+      if (visited_from_to && neighbour.accessable) {
+
+        neighbour_path.classList.add("visited");
+      } else if (visited_from_to && !neighbour.accessable) {
+
+        // neighbour_path.classList.add("visited");
+        neighbour_path.classList.add("path_closed");
+      };
+
       html_node.appendChild(neighbour_path);
     })
 
@@ -85,15 +96,16 @@ function move_by_button(game) {
       if (game.can_move_from_to(selected_node_id, next_node_id)) {
 
         game.current_node_id = next_node_id;
-        game.player_path = [...game.player_path, [selected_node_id, next_node_id]];
-        console.log(game.player_path)
-
-        //NOTE: to rerender game board and attach EventListener
-        render_nodes(game, "body");
-        move_by_button(game);
 
       };
-      move_button.classList.add("path_closed");
+
+      game.player_path = [...game.player_path, [selected_node_id, next_node_id]];
+      console.log(game.player_path)
+
+      //NOTE: to rerender game board and attach EventListener
+      render_nodes(game, "body");
+      move_by_button(game);
+      // move_button.classList.add("path_closed");
 
     })
   })
