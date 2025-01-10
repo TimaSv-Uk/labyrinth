@@ -30,14 +30,15 @@ function render_nodes(game, element_to_append = "body") {
 
     html_node.classList.add("node");
     html_node.id = nodeData.node_id;
-    html_node.innerText = `NodeId: ${nodeData.node_id};`;
+    // html_node.innerText = `NodeId: ${nodeData.node_id};`;
+    html_node.innerText = `Номер клетки: ${nodeData.node_id};`;
     nodeData.neighbour_nodes.forEach((neighbour) => {
       let neighbour_path = document.createElement("button");
       neighbour_path.classList.add("neighbour_path");
       neighbour_path.id = `${neighbour.neighbour_node_id}`;
       // neighbour_path.innerText = `path to: ${neighbour.neighbour_node_id} -- ${neighbour.accessable}`;
-      neighbour_path.innerText = `path to: ${neighbour.neighbour_node_id}`;
-
+      // neighbour_path.innerText = `path to: ${neighbour.neighbour_node_id}`;
+      neighbour_path.innerText = `Дверь к: ${neighbour.neighbour_node_id}`;
 
       let visited_from_to = game.player_path.find((path) => path[0] === nodeData.node_id && path[1] === neighbour.neighbour_node_id);
       if (visited_from_to && neighbour.accessable) {
@@ -160,7 +161,7 @@ game.make_neighbour_nodes_same_accessablity(7, 8, true);
 game.make_neighbour_nodes_same_accessablity(8, 9, false);
 
 
-if(!game.can_reach_destination()){
+if (!game.can_reach_destination()) {
   alert("Ты дурачек, лабиринт без выхода");
   console.log(game.can_reach_destination());
 }

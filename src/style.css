@@ -41,22 +41,33 @@ body {
 }
 
 .neighbour_path {
-  width: 100px;
+  width: 80%;
+  /* Use a percentage for flexible width */
+  max-width: 100px;
+  /* Optional: Limit the maximum width */
   border: 1px solid;
   border-radius: 5px;
 }
 
 .node {
   position: relative;
-  margin: 10px;
-  padding: 10px;
-  width: 300px;
-  height: 300px;
-  /* border-bottom: 10px solid black; */
-  /* border-right: 10px solid black; */
+  margin: 2%;
+  /* Use percentage for margins */
+  padding: 5%;
+  /* Use percentage for padding */
+  width: 90%;
+  /* Set width relative to the container */
+  max-width: 300px;
+  /* Limit the maximum width */
+  height: auto;
+  /* Let height adjust automatically */
+  aspect-ratio: 1;
+  /* Maintain a square aspect ratio */
   border: solid 10px black;
   display: flex;
   flex-grow: 1;
+  flex-wrap: wrap;
+  /* Ensure content wraps if needed */
 }
 
 .destination {
@@ -86,17 +97,34 @@ body {
   /* Outer border */
 }
 
-.grid-item {
-  border-bottom: 5px solid black;
-  border-right: 5px solid black;
+
+/* Add media queries for specific breakpoints */
+@media (max-width: 768px) {
+  .node {
+    max-width: 200px;
+    /* Adjust size for smaller screens */
+    border-width: 5px;
+    /* Reduce border thickness */
+    flex: col;
+  }
+
+  .neighbour_path {
+    width: 90%;
+    /* Adjust width for smaller screens */
+  }
 }
 
-/* Remove duplicate borders for last row and column */
-.grid-item:last-child,
-.grid-item:nth-child(4n) {
-  border-right: none;
-}
+@media (max-width: 480px) {
+  .node {
+    max-width: 150px;
+    /* Further adjust size for very small screens */
+    border-width: 3px;
+    flex: col;
+    /* Reduce border thickness further */
+  }
 
-.grid-item:nth-last-child(-n + 4) {
-  border-bottom: none;
+  .neighbour_path {
+    width: 100%;
+    /* Full width for very small screens */
+  }
 }
