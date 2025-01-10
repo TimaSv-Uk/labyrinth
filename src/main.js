@@ -35,7 +35,8 @@ function render_nodes(game, element_to_append = "body") {
       let neighbour_path = document.createElement("button");
       neighbour_path.classList.add("neighbour_path");
       neighbour_path.id = `${neighbour.neighbour_node_id}`;
-      neighbour_path.innerText = `path to: ${neighbour.neighbour_node_id} -- ${neighbour.accessable}`;
+      // neighbour_path.innerText = `path to: ${neighbour.neighbour_node_id} -- ${neighbour.accessable}`;
+      neighbour_path.innerText = `path to: ${neighbour.neighbour_node_id}`;
 
 
       let visited_from_to = game.player_path.find((path) => path[0] === nodeData.node_id && path[1] === neighbour.neighbour_node_id);
@@ -78,7 +79,7 @@ function render_nodes(game, element_to_append = "body") {
 /**
  * @param {GameGrid} game
 */
-function move_by_button(game) {
+function game_loop_move_by_button(game) {
 
   let move_buttons = document.querySelectorAll(".neighbour_path");
   move_buttons.forEach((move_button) => {
@@ -100,11 +101,21 @@ function move_by_button(game) {
       };
 
       game.player_path = [...game.player_path, [selected_node_id, next_node_id]];
-      console.log(game.player_path)
+
+      // TODO: Win scenario
+      if (game.current_node_id === game.destination_node_id) {
+        console.log("you win");
+        // Number of player moves:
+        alert(`you win in ${game.player_path.length - 1} moves`);
+      }
+
+      //NOTE: render number of player moves 
+      document.querySelector("#number_of_player_moves").innerText = `Number of player moves: ${game.player_path.length - 1}`;
+      console.log("number of player moves", game.player_path.length - 1);
 
       //NOTE: to rerender game board and attach EventListener
       render_nodes(game, "body");
-      move_by_button(game);
+      game_loop_move_by_button(game);
       // move_button.classList.add("path_closed");
 
     })
@@ -117,17 +128,42 @@ let nodes = [
   new GameNode(2),
   new GameNode(3),
   new GameNode(4),
+  new GameNode(5),
+  new GameNode(6),
+  new GameNode(7),
+  new GameNode(8),
+  new GameNode(9),
 ];
 let start_position = 1;
-let destination_position = 4;
+let destination_position = 9;
 let game = new GameGrid(nodes, start_position, destination_position);
 
-game.make_neighbour_nodes_same_accessablity(1, 2, true);
-game.make_neighbour_nodes_same_accessablity(1, 3, false);
-game.make_neighbour_nodes_same_accessablity(2, 4, true);
-game.make_neighbour_nodes_same_accessablity(3, 4, true);
+// NOTE: 2 on 2 path
+// game.make_neighbour_nodes_same_accessablity(1, 2, true);
+// game.make_neighbour_nodes_same_accessablity(1, 3, false);
+// game.make_neighbour_nodes_same_accessablity(2, 4, true);
+// game.make_neighbour_nodes_same_accessablity(3, 4, true);
 
-console.log(game.can_reach_destination());
+
+// closed dors 6
+game.make_neighbour_nodes_same_accessablity(1, 2, false);
+game.make_neighbour_nodes_same_accessablity(1, 4, true);
+game.make_neighbour_nodes_same_accessablity(2, 3, true);
+game.make_neighbour_nodes_same_accessablity(2, 5, true);
+game.make_neighbour_nodes_same_accessablity(3, 6, true);
+game.make_neighbour_nodes_same_accessablity(4, 5, false);
+game.make_neighbour_nodes_same_accessablity(4, 7, true);
+game.make_neighbour_nodes_same_accessablity(5, 6, false);
+game.make_neighbour_nodes_same_accessablity(5, 8, true);
+game.make_neighbour_nodes_same_accessablity(6, 9, true);
+game.make_neighbour_nodes_same_accessablity(7, 8, true);
+game.make_neighbour_nodes_same_accessablity(8, 9, false);
+
+
+if(!game.can_reach_destination()){
+  alert("Ты дурачек, лабиринт без выхода");
+  console.log(game.can_reach_destination());
+}
 
 render_nodes(game, "body");
-move_by_button(game);
+game_loop_move_by_button(game);

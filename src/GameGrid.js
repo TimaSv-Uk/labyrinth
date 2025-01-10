@@ -101,9 +101,9 @@ export class GameGrid {
 	 * @returns {boolean}
 	 */
 	can_move_from_to(selected_node_id, next_node_id) {
-		console.log(this.find_node(selected_node_id)
-			.neighbour_nodes
-			.find(node => node.neighbour_node_id === next_node_id && node.accessable))
+		// console.log(this.find_node(selected_node_id)
+		// 	.neighbour_nodes
+		// 	.find(node => node.neighbour_node_id === next_node_id && node.accessable))
 		if (this.find_node(selected_node_id)
 			.neighbour_nodes
 			.find(node => node.neighbour_node_id === next_node_id && node.accessable)) {
