@@ -110,8 +110,8 @@ function game_loop_move_by_button(game) {
       }
 
       //NOTE: render number of player moves 
-      document.querySelector("#number_of_player_moves").innerText = `Number of player moves: ${game.player_path.length - 1}`;
-      console.log("number of player moves", game.player_path.length - 1);
+      document.querySelector("#number_of_player_moves").innerText = `Побьеда за ходов: ${game.player_path.length - 1}`;
+      console.log("Побьеда за ходов", game.player_path.length - 1);
 
       //NOTE: to rerender game board and attach EventListener
       render_nodes(game, "body");
