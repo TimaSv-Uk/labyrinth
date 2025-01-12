@@ -74,8 +74,12 @@ body {
   background: red;
   color: white;
 }
+.node_inner_text{
+    width: 100%;
+}
+.labyrinth_builder{
 
-
+}
 .current {
   /* background: yellow; */
   border: solid 10px blue;

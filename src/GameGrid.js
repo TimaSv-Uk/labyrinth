@@ -31,13 +31,14 @@ export class GameGrid {
 	 * */
 	player_path;
 
+
 	/**
 	 *
 	 * @param {Array<GameNode>} nodes
 	 * @param {number} start_node_id
 	 * @param {number} destination_node_id
 	 * */
-	constructor(nodes, start_node_id, destination_node_id) {
+	custom_nodes_constructor(nodes, start_node_id, destination_node_id) {
 
 		if (this.is_valid_nodes(nodes)) {
 			this.nodes = nodes;
@@ -54,6 +55,65 @@ export class GameGrid {
 
 		this.player_path = [[start_node_id, start_node_id]];
 
+	}
+
+	/**
+	 *
+	 * @param {number} number_of_nodes
+	 * @param {number} start_node_id
+	 * @param {number} destination_node_id
+	 * */
+	constructor(number_of_nodes, start_node_id, destination_node_id) {
+
+		this.make_empty_nodes(number_of_nodes);
+
+		if (start_node_id > number_of_nodes) {
+			throw new Error("there is no node with startNodeId in nodes");
+		}
+		if (destination_node_id > number_of_nodes) {
+			throw new Error("there is no node with destinationNodeId in nodes");
+		}
+		if (start_node_id === destination_node_id) {
+			throw new Error(" startNodeId = destinationNodeId");
+		}
+
+		this.start_node_id = start_node_id;
+		this.current_node_id = start_node_id;
+		this.destination_node_id = destination_node_id;
+
+		this.player_path = [[start_node_id, start_node_id]];
+
+	}
+
+	/**
+	 *
+	 * @param {number} number_of_nodes
+	 * */
+	make_empty_nodes(number_of_nodes) {
+
+		let labyrynth_dymentions = Math.floor(Math.sqrt(number_of_nodes));
+
+		let list_of_empty_nodes = [];
+		for (let i = 1; i <= number_of_nodes; i++) {
+			list_of_empty_nodes.push(new GameNode(i));
+		};
+
+		this.nodes = list_of_empty_nodes;
+	}
+
+	/**
+	 *
+	 * @param {number} number_of_nodes
+	 * */
+	get_neigbors_from(number_of_nodes) {
+
+
+		let list_of_empty_nodes = [];
+		for (let i = 1; i <= number_of_nodes; i++) {
+			list_of_empty_nodes.push(new GameNode(i));
+		};
+
+		this.nodes = list_of_empty_nodes;
 	}
 	/**
 	 *
@@ -182,7 +242,7 @@ export class GameGrid {
 
 			if (current_node_id === this.destination_node_id) {
 
-				console.log("found", current_node_id);
+				// console.log("found", current_node_id);
 				return true;
 			}
 
@@ -192,6 +252,41 @@ export class GameGrid {
 		};
 
 		return dfs(this.start_node_id);
+	}
+
+	make_neighbour_grid_with_open_walls() {
+
+		let labyrynth_dymentions = Math.floor(Math.sqrt(this.nodes.length));
+
+		for (let i = 0; i < this.nodes.length; i++) {
+
+
+			let current_node_loop = this.nodes[i];
+			let left_node = (i % labyrynth_dymentions === 0 ? undefined : this.nodes[i - 1]);
+			let top_node = this.nodes[i - labyrynth_dymentions];
+			let right_node = (((i + 1) % labyrynth_dymentions === 0 && i > 0) ? undefined : this.nodes[i + 1]);
+			let bottom_node = this.nodes[i + labyrynth_dymentions];
+			if (left_node) {
+
+				current_node_loop.add_neighbour_node(left_node.node_id, true);
+			}
+
+			if (right_node) {
+
+				current_node_loop.add_neighbour_node(right_node.node_id, true);
+			}
+
+			if (top_node) {
+
+				current_node_loop.add_neighbour_node(top_node.node_id, true);
+			}
+
+			if (bottom_node) {
+
+				current_node_loop.add_neighbour_node(bottom_node.node_id, true);
+			}
+		};
+
 	}
 }
 
