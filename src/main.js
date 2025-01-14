@@ -1,46 +1,28 @@
 import { GameNode } from "./GameNode";
 import { GameGrid } from "./GameGrid";
+import { render_nodes, game_loop_move_by_button, make_labyrinth_from_code } from "./render_game";
 
-import { render_nodes, game_loop_move_by_button } from "./render_game";
+// let start_position = 1;
+// let destination_position = 9;
+// let game = new GameGrid(9, start_position, destination_position);
 
-// let nodes = [
-//   new GameNode(1),
-//   new GameNode(2),
-//   new GameNode(3),
-//   new GameNode(4),
-//   new GameNode(5),
-//   new GameNode(6),
-//   new GameNode(7),
-//   new GameNode(8),
-//   new GameNode(9),
-// ];
-let start_position = 1;
-let destination_position = 9;
-let game = new GameGrid(9, start_position, destination_position);
-// NOTE: 2 on 2 path
-// game.make_neighbour_nodes_same_accessablity(1, 2, true);
-// game.make_neighbour_nodes_same_accessablity(1, 3, false);
-// game.make_neighbour_nodes_same_accessablity(2, 4, true);
-// game.make_neighbour_nodes_same_accessablity(3, 4, true);
 
-// closed dors 6
-game.make_neighbour_nodes_same_accessablity(1, 2, false);
-game.make_neighbour_nodes_same_accessablity(1, 4, true);
-game.make_neighbour_nodes_same_accessablity(2, 3, true);
-game.make_neighbour_nodes_same_accessablity(2, 5, true);
-game.make_neighbour_nodes_same_accessablity(3, 6, true);
-game.make_neighbour_nodes_same_accessablity(4, 5, false);
-game.make_neighbour_nodes_same_accessablity(4, 7, true);
-game.make_neighbour_nodes_same_accessablity(5, 6, false);
-game.make_neighbour_nodes_same_accessablity(5, 8, true);
-game.make_neighbour_nodes_same_accessablity(6, 9, true);
-game.make_neighbour_nodes_same_accessablity(7, 8, true);
-game.make_neighbour_nodes_same_accessablity(8, 9, false);
+// if (!game.can_reach_destination()) {
+//   alert("Ты дурачек, лабиринт без выхода");
+//   console.log(game.can_reach_destination());
+// }
 
-if (!game.can_reach_destination()) {
-  alert("Ты дурачек, лабиринт без выхода");
-  console.log(game.can_reach_destination());
-}
+let decode_object = document.querySelector("#decode_object");
+decode_object.addEventListener("click", (ev) => {
+  let incoded_object = document.querySelector("#incoded_object");
+  try {
+    let game = make_labyrinth_from_code(incoded_object.value);
+    render_nodes(game);
+    game_loop_move_by_button(game);
+  } catch (er) {
+    incoded_object.value = "";
+    alert(er);
+    // alert("Invalid code")
+  }
+});
 
-render_nodes(game, "main_body");
-game_loop_move_by_button(game);

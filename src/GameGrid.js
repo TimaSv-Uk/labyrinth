@@ -84,7 +84,6 @@ export class GameGrid {
 		this.player_path = [[start_node_id, start_node_id]];
 
 	}
-
 	/**
 	 *
 	 * @param {number} number_of_nodes
@@ -145,7 +144,6 @@ export class GameGrid {
 	}
 
 
-
 	/**
 	 * Find a node by its ID.
 	 * @param {number} node_id
@@ -156,14 +154,13 @@ export class GameGrid {
 	}
 
 	/**
+	 * Check if movement is possible between two nodes.
 	 * @param {number} selected_node_id
 	 * @param {number} next_node_id
 	 * @returns {boolean}
 	 */
 	can_move_from_to(selected_node_id, next_node_id) {
-		// console.log(this.find_node(selected_node_id)
-		// 	.neighbour_nodes
-		// 	.find(node => node.neighbour_node_id === next_node_id && node.accessable))
+
 		if (this.find_node(selected_node_id)
 			.neighbour_nodes
 			.find(node => node.neighbour_node_id === next_node_id && node.accessable)) {
@@ -172,6 +169,31 @@ export class GameGrid {
 		return false;
 	}
 
+
+
+	/**
+	 * @param {number} node_1_id
+	 * @param {number} node_2_id
+	 * @returns {boolean} 
+	 * */
+	toggle_door(node_1_id, node_2_id) {
+
+		let selected_node = this.find_node(node_1_id);
+
+		if (selected_node) {
+			// game.make_neighbour_to_node1(selected_node_id, next_node_id);
+
+			selected_node.toggle_neighbour_node_accessability(node_2_id);
+		}
+		if (!this.can_reach_destination()) {
+
+			//NOTE: return door to how it been
+			selected_node.toggle_neighbour_node_accessability(node_2_id);
+			return false;
+		}
+
+		return true;
+	}
 	/**
 	 * @param {number} node_1_id
 	 * @param {number} node_2_id
@@ -194,6 +216,8 @@ export class GameGrid {
 		node_1.add_neighbour_node(node_2_id, accessable);
 		// this.neighbour_nodes.add({ neighbour_node_id: neighbour_node_id, accessable: accessable });
 	}
+
+
 	/**
 	 * @param {number} node_1_id
 	 * @param {number} node_2_id

@@ -9,52 +9,51 @@
   font-family: Arial, sans-serif;
   color: #333;
 
+  /* Label styling */
+  label {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
 
-/* Label styling */
-label {
-  display: block;
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #555;
-}
+  /* Input styling */
+  input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
 
-/* Input styling */
-input {
-  width: 100%;
-  padding: 8px 12px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
+  input[type="number"]:focus {
+    border-color: #2772BC;
+    outline: none;
+  }
 
-input[type="number"]:focus {
-  border-color: #2772BC;
-  outline: none;
-}
+  /* Button styling */
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: white;
+    background-color: #2772BC;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
 
-/* Button styling */
-button {
-  display: block;
-  width: 100%;
-  padding: 10px 15px;
-  font-size: 1rem;
-  color: white;
-  background-color: #2772BC;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+  button:hover {
+    background-color: #1e5a90;
+  }
 
-button:hover {
-  background-color: #1e5a90;
-}
-
-button:active {
-  background-color: #164775;
-}
+  button:active {
+    background-color: #164775;
+  }
 }
