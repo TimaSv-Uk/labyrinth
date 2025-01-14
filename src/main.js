@@ -2,6 +2,7 @@ import { GameNode } from "./GameNode";
 import { GameGrid } from "./GameGrid";
 import { render_nodes, game_loop_move_by_button, make_labyrinth_from_code, render_incode_button } from "./render_game";
 import { render_neighbour_grid_with_open_walls, } from "./labyrinth_builder";
+
 let decode_object = document.querySelector("#decode_object");
 if (decode_object) {
   decode_object.addEventListener("click", (ev) => {
@@ -23,17 +24,24 @@ if (decode_object) {
 }
 
 
+
+//NOTE: default render
+// render_neighbour_grid_with_open_walls(9, 1, 1, 9)
+
 let generate_labyrinth_button = document.querySelector("#generate_labyrinth");
 if (generate_labyrinth_button) {
 
-  //NOTE: default render
-  // render_neighbour_grid_with_open_walls(9, 1, 1, 9)
 
   function initialize_generate_labyrinth() {
+
     let number_of_nodes = document.querySelector("#number_of_nodes").value;
     let start_position = parseInt(document.querySelector("#start_position").value);
     let destination_position = parseInt(document.querySelector("#destination_position").value);
 
+    if (!number_of_nodes || isNaN(start_position) || isNaN(destination_position)) {
+      alert("Invalid inputs. Please ensure all values are filled in correctly.");
+      return;
+    }
     try {
       render_neighbour_grid_with_open_walls(number_of_nodes, 1, start_position, destination_position);
     } catch (er) {
@@ -41,11 +49,11 @@ if (generate_labyrinth_button) {
     }
   }
 
-  generate_labyrinth_button.addEventListener("click", (ev) => {
-    initialize_generate_labyrinth();
+  generate_labyrinth_button.addEventListener("click", () => {
+      initialize_generate_labyrinth();
+  });
+  document.addEventListener("DOMContentLoaded", () => {
+      initialize_generate_labyrinth();
   });
 
-  document.addEventListener("DOMContentLoaded", (ev) => {
-    initialize_generate_labyrinth();
-  });
 }

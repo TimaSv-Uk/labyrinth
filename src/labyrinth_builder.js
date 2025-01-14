@@ -14,7 +14,6 @@ export function render_neighbour_grid_with_open_walls(number_of_nodes, number_of
 	game.make_neighbour_grid_with_open_walls();
 	render_nodes_door_access_visible(game, "body");
 
-	render_incode_button(game, "body");
 	toggle_doors_byuit_labytynth(game);
 
 	// game_loop_move_by_button(game);
