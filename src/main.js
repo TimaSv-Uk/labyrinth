@@ -27,21 +27,25 @@ let generate_labyrinth_button = document.querySelector("#generate_labyrinth");
 if (generate_labyrinth_button) {
 
   //NOTE: default render
-  render_neighbour_grid_with_open_walls(9, 1, 1, 9)
-  render_incode_button(new GameGrid(9, 1, 9), "body");
-  
-  generate_labyrinth_button.addEventListener("click", (ev) => {
+  // render_neighbour_grid_with_open_walls(9, 1, 1, 9)
 
+  function initialize_generate_labyrinth() {
     let number_of_nodes = document.querySelector("#number_of_nodes").value;
-
     let start_position = parseInt(document.querySelector("#start_position").value);
     let destination_position = parseInt(document.querySelector("#destination_position").value);
 
     try {
-      render_neighbour_grid_with_open_walls(number_of_nodes, 1, start_position, destination_position)
+      render_neighbour_grid_with_open_walls(number_of_nodes, 1, start_position, destination_position);
     } catch (er) {
-
-      alert(er)
+      alert(er);
     }
+  }
+
+  generate_labyrinth_button.addEventListener("click", (ev) => {
+    initialize_generate_labyrinth();
+  });
+
+  document.addEventListener("DOMContentLoaded", (ev) => {
+    initialize_generate_labyrinth();
   });
 }
