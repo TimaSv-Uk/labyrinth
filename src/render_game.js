@@ -216,6 +216,38 @@ export function game_loop_move_by_button(game) {
 
 /**
  * @param {GameGrid} game
+ * @param {string} parentElement
+ */
+export function render_incode_button(game, parentElement) {
+	// Виберіть батьківський елемент
+	let parent_element = document.querySelector(parentElement);
+
+	// Видаліть будь-яку існуючу форму з тим самим ID
+	let existingForm = document.querySelector(".copy_labyrynth_form");
+	if (existingForm) {
+		existingForm.remove();
+	}
+
+	// Додайте HTML форми
+	parent_element.innerHTML += `
+  <div id="generate_labyrinth_form" class="copy_labyrynth_form">
+    <br/>
+    <button id="copy_labyrynth_code" value="none">Неможливо скопіювати код лабіринту</button>
+  </div>
+  `;
+
+	// Виберіть кнопку копіювання та встановіть її значення на закодований об'єкт гри
+	let copy_labyrynth_code = document.querySelector("#copy_labyrynth_code");
+	copy_labyrynth_code.value = incode(game);
+	copy_labyrynth_code.innerText = "Скопіювати код лабіринту";
+
+	// Додайте обробник події кліку для копіювання коду лабіринту
+	copy_labyrynth_code.addEventListener("click", () => {
+		navigator.clipboard.writeText(copy_labyrynth_code.value);
+	});
+}
+/**
+ * @param {GameGrid} game
  */
 export function toggle_doors_byuit_labytynth(game) {
 
@@ -238,38 +270,6 @@ export function toggle_doors_byuit_labytynth(game) {
 			toggle_doors_byuit_labytynth(game);
 			// move_button.classList.add("path_closed");
 		});
-	});
-}
-/**
- * @param {GameGrid} гра
- * @param {string} parentElement
- */
-function render_incode_button(гра, parentElement) {
-	// Виберіть батьківський елемент
-	let parent_element = document.querySelector(parentElement);
-
-	// Видаліть будь-яку існуючу форму з тим самим ID
-	let existingForm = document.querySelector(".copy_labyrynth_form");
-	if (existingForm) {
-		existingForm.remove();
-	}
-
-	// Додайте HTML форми
-	parent_element.innerHTML += `
-  <div id="generate_labyrinth_form" class="copy_labyrynth_form">
-    <br/>
-    <button id="copy_labyrynth_code" value="none">Неможливо скопіювати код лабіринту</button>
-  </div>
-  `;
-
-	// Виберіть кнопку копіювання та встановіть її значення на закодований об'єкт гри
-	let copy_labyrynth_code = document.querySelector("#copy_labyrynth_code");
-	copy_labyrynth_code.value = incode(гра);
-	copy_labyrynth_code.innerText = "Скопіювати код лабіринту";
-
-	// Додайте обробник події кліку для копіювання коду лабіринту
-	copy_labyrynth_code.addEventListener("click", () => {
-		navigator.clipboard.writeText(copy_labyrynth_code.value);
 	});
 }
 /**

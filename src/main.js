@@ -1,8 +1,7 @@
 import { GameNode } from "./GameNode";
 import { GameGrid } from "./GameGrid";
-import { render_nodes, game_loop_move_by_button, make_labyrinth_from_code } from "./render_game";
-import { render_neighbour_grid_with_open_walls } from "./labyrinth_builder";
-
+import { render_nodes, game_loop_move_by_button, make_labyrinth_from_code, render_incode_button } from "./render_game";
+import { render_neighbour_grid_with_open_walls, } from "./labyrinth_builder";
 let decode_object = document.querySelector("#decode_object");
 if (decode_object) {
   decode_object.addEventListener("click", (ev) => {
@@ -27,7 +26,10 @@ if (decode_object) {
 let generate_labyrinth_button = document.querySelector("#generate_labyrinth");
 if (generate_labyrinth_button) {
 
+  //NOTE: default render
   render_neighbour_grid_with_open_walls(9, 1, 1, 9)
+  render_incode_button(new GameGrid(9, 1, 9), "body");
+  
   generate_labyrinth_button.addEventListener("click", (ev) => {
 
     let number_of_nodes = document.querySelector("#number_of_nodes").value;
