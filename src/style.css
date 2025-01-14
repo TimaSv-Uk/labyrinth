@@ -99,6 +99,7 @@ body {
   background: #CE4848;
   color: white;
 }
+
 /* Labyrinth builder section */
 .labyrinth_builder {
   margin: 20px auto;
@@ -116,6 +117,33 @@ body {
   gap: 2px;
   border: 1px solid black;
   margin: 20px auto;
+}
+
+.styled-link {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  background-color: #2772BC;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.styled-link:hover {
+  background-color: #1e5a90;
+}
+
+
+.styled-link:focus {
+  outline: none;
+  /* Removes the default outline on focus */
+  box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
+  /* Adds a glowing effect on focus */
 }
 
 /* Responsive design */

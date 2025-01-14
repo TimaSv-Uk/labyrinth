@@ -17,6 +17,11 @@ decode_object.addEventListener("click", (ev) => {
   let incoded_object = document.querySelector("#incoded_object");
   try {
     let game = make_labyrinth_from_code(incoded_object.value);
+
+    //NOTE: render number of player moves
+    document.querySelector(
+      "#number_of_player_moves"
+    ).innerText = `Количесво ходов: ${game.player_path.length - 1}`;
     render_nodes(game);
     game_loop_move_by_button(game);
   } catch (er) {

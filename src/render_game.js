@@ -198,15 +198,14 @@ export function game_loop_move_by_button(game) {
 			if (game.current_node_id === game.destination_node_id) {
 				console.log("you win");
 				// Number of player moves:
+
 				alert(`you win in ${game.player_path.length - 1} moves`);
 			}
 
-			//NOTE: render number of player moves
-			// document.querySelector(
-			//   "#number_of_player_moves"
-			// ).innerText = `number_of_player_moves: ${game.player_path.length - 1}`;
-			console.log("number_of_player_moves", game.player_path.length - 1);
 
+			document.querySelector(
+				"#number_of_player_moves"
+			).innerText = `Количесво ходов: ${game.player_path.length - 1}`;
 			//NOTE: to rerender game board and attach EventListener
 			render_nodes(game);
 			game_loop_move_by_button(game);
