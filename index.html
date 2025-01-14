@@ -6,19 +6,27 @@
   <link rel="icon" type="image/svg+xml" href="/labyrinth/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite App</title>
-  <script type="module" crossorigin src="/labyrinth/assets/index-3YNrnTV6.js"></script>
-  <link rel="stylesheet" crossorigin href="/labyrinth/assets/index-C3-8dnVo.css">
+
+  <script type="module" crossorigin src="/labyrinth/assets/index-DjiZ0rZT.js"></script>
+  <link rel="stylesheet" crossorigin href="/labyrinth/assets/index-yo1HLzyz.css">
 </head>
 
-<body>
+<body id="main_body">
+  <div id="generate_labyrinth_form">
+      <a href="generate_labyrinth.html" class="styled-link">Создай свой лабиринт</a>
 
-  <p>Правила: дойди с начальной точки до коненой минимальнім количаством ходов</p>
-  <p>Синий край клетки --- ето твое место положение</p>
-  <p>Красная клетка финиш, зеленая старт</p>
-  <div style="margin-top: 10px;">
-    <label id="number_of_player_moves">Количество ходов: 0</label>
+    <label>Правила: </label>
+    <p> дойди с начальной точки до коненой минимальнім количаством ходов</p>
+    <p>Синий край клетки --- ето твое место положение</p>
+    <p>Красная клетка финиш, зеленая старт</p>
+    <div style="margin-top: 10px;">
+      <label id="number_of_player_moves">Количество ходов: 0</label>
+    </div>
+    <label>Enter code: </label>
+    <input id="incoded_object" type="text" />
+    <button id="decode_object">Decode object</button>
   </div>
-  
+
 </body>
 
 </html>
