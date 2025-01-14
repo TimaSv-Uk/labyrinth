@@ -27,6 +27,7 @@ if (decode_object) {
 let generate_labyrinth_button = document.querySelector("#generate_labyrinth");
 if (generate_labyrinth_button) {
 
+  render_neighbour_grid_with_open_walls(9, 1, 1, 9)
   generate_labyrinth_button.addEventListener("click", (ev) => {
 
     let number_of_nodes = document.querySelector("#number_of_nodes").value;

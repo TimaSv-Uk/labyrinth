@@ -228,7 +228,7 @@ export function toggle_doors_byuit_labytynth(game) {
 			let toggle_door = game.toggle_door(selected_node_id, next_node_id);
 			//succesfuly toogle door
 			if (!toggle_door) {
-				alert("Cant make imposible labyrynth");
+				alert("Неможливо створити непроходимий лабіринт");
 			}
 
 
@@ -240,42 +240,41 @@ export function toggle_doors_byuit_labytynth(game) {
 		});
 	});
 }
-
 /**
- * @param {GameGrid} game
+ * @param {GameGrid} гра
  * @param {string} parentElement
  */
-function render_incode_button(game, parentElement) {
-	// Select the parent element
+function render_incode_button(гра, parentElement) {
+	// Виберіть батьківський елемент
 	let parent_element = document.querySelector(parentElement);
 
-	// Remove any existing form with the same ID
+	// Видаліть будь-яку існуючу форму з тим самим ID
 	let existingForm = document.querySelector(".copy_labyrynth_form");
 	if (existingForm) {
 		existingForm.remove();
 	}
 
-	// Add the form HTML
+	// Додайте HTML форми
 	parent_element.innerHTML += `
   <div id="generate_labyrinth_form" class="copy_labyrynth_form">
     <br/>
-    <button id="copy_labyrynth_code" value="none">Can't copy labyrinth code</button>
+    <button id="copy_labyrynth_code" value="none">Неможливо скопіювати код лабіринту</button>
   </div>
   `;
 
-	// Select the copy button and set its value to the encoded game object
+	// Виберіть кнопку копіювання та встановіть її значення на закодований об'єкт гри
 	let copy_labyrynth_code = document.querySelector("#copy_labyrynth_code");
-	copy_labyrynth_code.value = incode(game);
-	copy_labyrynth_code.innerText = "Copy labyrinth code";
+	copy_labyrynth_code.value = incode(гра);
+	copy_labyrynth_code.innerText = "Скопіювати код лабіринту";
 
-	// Add a click event listener to copy the labyrinth code
+	// Додайте обробник події кліку для копіювання коду лабіринту
 	copy_labyrynth_code.addEventListener("click", () => {
 		navigator.clipboard.writeText(copy_labyrynth_code.value);
 	});
 }
 /**
-	*@param {string} incoded_labyrinth 
-	*@returns {GameGrid}
+    *@param {string} incoded_labyrinth 
+    *@returns {GameGrid}
 */
 export function make_labyrinth_from_code(incoded_labyrinth) {
 

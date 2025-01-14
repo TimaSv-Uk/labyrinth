@@ -168,3 +168,30 @@ body {
     width: 100%;
   }
 }
+
+#game_instructions {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  p {
+    line-height: 1.6;
+    margin: 15px 0;
+  }
+
+  p strong {
+    font-size: 1.2em;
+  }
+
+  a {
+    color: #3498db;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
