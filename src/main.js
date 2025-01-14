@@ -2,6 +2,7 @@ import { GameNode } from "./GameNode";
 import { GameGrid } from "./GameGrid";
 
 import { render_nodes, game_loop_move_by_button } from "./render_game";
+
 // let nodes = [
 //   new GameNode(1),
 //   new GameNode(2),
@@ -41,5 +42,5 @@ if (!game.can_reach_destination()) {
   console.log(game.can_reach_destination());
 }
 
-render_nodes(game, "body");
+render_nodes(game, "main_body");
 game_loop_move_by_button(game);

@@ -88,17 +88,17 @@ body {
   opacity: 0.8;
 }
 
-/* Node states */
-.neighbour_path.path_closed {
-  background: #CE4848;
-  color: white;
-}
 
+/* Node states */
 .neighbour_path.visited {
   background-color: #2772BC;
   color: white;
 }
 
+.neighbour_path.path_closed {
+  background: #CE4848;
+  color: white;
+}
 /* Labyrinth builder section */
 .labyrinth_builder {
   margin: 20px auto;

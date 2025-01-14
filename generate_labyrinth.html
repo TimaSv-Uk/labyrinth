@@ -15,21 +15,33 @@
 <body>
   <div id="generate_labyrinth_form">
     <label>Number of nodes: </label>
-    <input id="number_of_nodes" type="number" value="9"/>
+    <input id="number_of_nodes" type="number" value="9" />
 
-    <label>Number of closed doors: </label>
-    <input id="number_of_closed_doors" type="number" value="4"/>
 
 
     <label>Start position(node id): </label>
-    <input id="start_position" type="number" value="2"/>
+    <input id="start_position" type="number" value="2" />
 
 
     <label>Destination position(node id): </label>
-    <input id="destination_position" type="number" value="8"/>
+    <input id="destination_position" type="number" value="8" />
+
+
 
     <button id="generate_labyrinth">Generate labyrinth</button>
   </div>
+
+
+  <div id="generate_labyrinth_form">
+    <label>Enter code: </label>
+    <input id="incoded_object" type="text" />
+    <button id="decode_object">Decode object</button>
+    <br/>
+    <button id="copy_labyrynth_code" value="none">Can't copy labyrynth code</button>
+  </div>
+  
+    <!-- <label>Number of closed doors: </label> -->
+    <!-- <input id="number_of_closed_doors" type="number" value="4" /> -->
 </body>
 
 </html>

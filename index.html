@@ -10,13 +10,18 @@
   <link rel="stylesheet" href="/src/style.css">
 </head>
 
-<body>
+<body id="main_body">
 
   <p>Правила: дойди с начальной точки до коненой минимальнім количаством ходов</p>
   <p>Синий край клетки --- ето твое место положение</p>
   <p>Красная клетка финиш, зеленая старт</p>
   <div style="margin-top: 10px;">
     <label id="number_of_player_moves">Количество ходов: 0</label>
+  </div>
+  <div id="generate_labyrinth_form">
+    <label>Enter code: </label>
+    <input id="incoded_object" type="text" />
+    <button id="decode_object">Decode object</button>
   </div>
   
 </body>
