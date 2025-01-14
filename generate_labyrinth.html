@@ -1,40 +1,47 @@
 <!doctype html>
-<html lang="en">
+<html lang="uk">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/labyrinth/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generate labyrinth</title>
-  <script type="module" crossorigin src="/labyrinth/assets/generate_labyrinth-D7P4ohQ9.js"></script>
-  <link rel="stylesheet" crossorigin href="/labyrinth/assets/generate_labyrinth-yo1HLzyz.css">
+  <title>Генерація лабіринту</title>
+  <script type="module" crossorigin src="/labyrinth/assets/generate_labyrinth-ffKrnd2d.js"></script>
+  <link rel="stylesheet" crossorigin href="/labyrinth/assets/generate_labyrinth-CyxQ6PpR.css">
 </head>
 
 <body>
   <div id="generate_labyrinth_form">
-      <a href="index.html" class="styled-link">Основная страница</a>
+    <h1>Створення лабіринту:</h1>
+    <a href="index.html" class="styled-link">Основна сторінка</a>
 
-    <label>Number of nodes: </label>
+    <div id="game_instructions">
+      <p> Ось інструкція для вашої гри: </p>
+      <p> <strong>Створення лабіринту:</strong> <br> На сторінці генерації лабіринту введіть кількість вузлів, початкову
+        та кінцеву позиції. <br> Натисніть кнопку "Генерувати лабіринт". </p>
+      <p> <strong>Рух гравця:</strong> <br> Натисніть на сині кнопки сусідніх шляхів, щоб перемістити гравця. <br> Ваше
+        місцезнаходження позначено синьою рамкою клітинки. <br> Мета гри — досягти червоної клітинки (фініш) зі
+        стартової
+        зеленої клітинки. </p>
+      <p> <strong>Тумблери дверей:</strong> <br> Клікніть на кнопку сусіднього шляху, щоб зламати або закрити двері між
+        вузлами. <br> Якщо неможливо закрити двері без створення непроходимого лабіринту, з'явиться повідомлення
+        "Неможливо створити непроходимий лабіринт". </p>
+      <p> <strong>Копіювання та декодування лабіринту:</strong> <br> Натисніть кнопку "Скопіювати код лабіринту" для
+        копіювання коду поточного лабіринту. <br> Введіть код лабіринту в поле "Введіть код" та натисніть "Декодувати
+        об'єкт" для завантаження збереженого лабіринту. </p>
+      <p> Якщо потрібно додати щось ще або є інші питання, дайте знати! </p>
+    </div>
+    <label>Кількість клітин: </label>
     <input id="number_of_nodes" type="number" value="9" />
 
+    <label>Початкова позиція (id клітини): </label>
+    <input id="start_position" type="number" value="1" />
 
+    <label>Позиція призначення (id клітини): </label>
+    <input id="destination_position" type="number" value="9" />
 
-    <label>Start position(node id): </label>
-    <input id="start_position" type="number" value="2" />
-
-
-    <label>Destination position(node id): </label>
-    <input id="destination_position" type="number" value="8" />
-
-
-
-    <button id="generate_labyrinth">Generate labyrinth</button>
+    <button id="generate_labyrinth">Генерувати код лабіринт</button>
   </div>
-
-
-
-  <!-- <label>Number of closed doors: </label> -->
-  <!-- <input id="number_of_closed_doors" type="number" value="4" /> -->
 </body>
 
 </html>
