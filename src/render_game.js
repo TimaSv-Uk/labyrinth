@@ -194,19 +194,22 @@ export function game_loop_move_by_button(game) {
 				[selected_node_id, next_node_id],
 			];
 
-			// TODO: Win scenario
-			if (game.current_node_id === game.destination_node_id) {
-				console.log("you win");
-				// Number of player moves:
-
-				alert(`you win in ${game.player_path.length - 1} moves`);
-			}
-
 
 			document.querySelector(
 				"#number_of_player_moves"
 			).innerText = `Количесво ходов: ${game.player_path.length - 1}`;
 			//NOTE: to rerender game board and attach EventListener
+			// TODO: Win scenario
+			if (game.current_node_id === game.destination_node_id) {
+
+				console.log("you win");
+				// Number of player moves:
+				alert(`you win in ${game.player_path.length - 1} moves`);
+				render_nodes_door_access_visible(game);
+				return;
+			}
+
+
 			render_nodes(game);
 			game_loop_move_by_button(game);
 			// move_button.classList.add("path_closed");
