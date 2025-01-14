@@ -9,10 +9,27 @@
   <script type="module" src="/src/main.js" defer></script>
   <script type="module" src="/src/labyrinth_builder.js" defer></script>
   <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/src/generate_labyrinth.css">
 </head>
 
 <body>
+  <div id="generate_labyrinth_form">
+    <label>Number of nodes: </label>
+    <input id="number_of_nodes" type="number" value="9"/>
 
+    <label>Number of closed doors: </label>
+    <input id="number_of_closed_doors" type="number" value="4"/>
+
+
+    <label>Start position(node id): </label>
+    <input id="start_position" type="number" value="2"/>
+
+
+    <label>Destination position(node id): </label>
+    <input id="destination_position" type="number" value="8"/>
+
+    <button id="generate_labyrinth">Generate labyrinth</button>
+  </div>
 </body>
 
 </html>

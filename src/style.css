@@ -1,17 +1,4 @@
-/* :root { */
-/*   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
-/*   line-height: 1.5; */
-/*   font-weight: 400; */
-/**/
-/*   color-scheme: light dark; */
-/*   color: rgba(255, 255, 255, 0.87); */
-/*   background-color: #242424; */
-/**/
-/*   font-synthesis: none; */
-/*   text-rendering: optimizeLegibility; */
-/*   -webkit-font-smoothing: antialiased; */
-/*   -moz-osx-font-smoothing: grayscale; */
-/* } */
+/* Reset styles for consistency */
 * {
   margin: 0;
   padding: 0;
@@ -21,114 +8,135 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
+/* Grid container */
 #grid {
-  width: fit-content;
-  border-collapse: collapse;
   display: grid;
-  align-items: center;
   gap: 10px;
+  align-items: center;
+  justify-content: center;
+  border-collapse: collapse;
+  width: fit-content;
+  margin: 20px auto;
 }
 
-
-.path_closed {
-  background: red;
-}
-
-.visited {
-  background: blue;
-}
-
-.neighbour_path {
-  width: 80%;
-  /* Use a percentage for flexible width */
-  max-width: 100px;
-  /* Optional: Limit the maximum width */
-  border: 1px solid;
-  border-radius: 5px;
-}
-
+/* Node styles */
 .node {
   position: relative;
   margin: 2%;
-  /* Use percentage for margins */
   padding: 5%;
-  /* Use percentage for padding */
   width: 90%;
-  /* Set width relative to the container */
   max-width: 300px;
-  /* Limit the maximum width */
   height: auto;
-  /* Let height adjust automatically */
   aspect-ratio: 1;
-  /* Maintain a square aspect ratio */
-  border: solid 10px black;
+  /* Maintain a square shape */
+  border: 10px solid black;
+  background: #fff;
+  border-radius: 10px;
   display: flex;
-  flex-grow: 1;
   flex-wrap: wrap;
-  /* Ensure content wraps if needed */
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.node:hover {
+  transform: scale(1.05);
+  /* background: #f0f0f0; */
+}
+
+.node_inner_text {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+}
+
+
+.current {
+  border-color: #007bff;
 }
 
 .destination {
-  background: red;
+  background: #ff4d4d;
   color: white;
 }
-.node_inner_text{
-    width: 100%;
-}
-.labyrinth_builder{
-
-}
-.current {
-  /* background: yellow; */
-  border: solid 10px blue;
-}
-
 
 .start {
-  background: green;
+  background: #28a745;
   color: white;
 }
 
+
+.neighbour_path {
+  width: 80%;
+  max-width: 100px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #f9f9f9;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.neighbour_path:hover {
+  /* background: #e6e6e6; */
+  opacity: 0.8;
+}
+
+/* Node states */
+.neighbour_path.path_closed {
+  background: #CE4848;
+  color: white;
+}
+
+.neighbour_path.visited {
+  background-color: #2772BC;
+  color: white;
+}
+
+/* Labyrinth builder section */
+.labyrinth_builder {
+  margin: 20px auto;
+  text-align: center;
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Grid layout */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* 4 columns */
-  gap: 0;
-  /* No gaps, borders handle spacing */
+  gap: 2px;
   border: 1px solid black;
-  /* Outer border */
+  margin: 20px auto;
 }
 
-
-/* Add media queries for specific breakpoints */
+/* Responsive design */
 @media (max-width: 768px) {
   .node {
     max-width: 200px;
-    /* Adjust size for smaller screens */
     border-width: 5px;
-    /* Reduce border thickness */
-    flex: col;
   }
 
   .neighbour_path {
     width: 90%;
-    /* Adjust width for smaller screens */
   }
 }
 
 @media (max-width: 480px) {
   .node {
     max-width: 150px;
-    /* Further adjust size for very small screens */
     border-width: 3px;
-    flex: col;
-    /* Reduce border thickness further */
   }
 
   .neighbour_path {
     width: 100%;
-    /* Full width for very small screens */
   }
 }

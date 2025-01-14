@@ -3,14 +3,13 @@ import { GameNode } from "./GameNode";
 import { render_nodes, game_loop_move_by_button } from "./render_game";
 
 /**  
+ *  @param {number} number_of_nodes 
  *  @param {number} number_of_colsed_doors 
  **/
-function make_random_labyrinth(number_of_colsed_doors) {
+function make_random_labyrinth(number_of_nodes, number_of_colsed_doors, start_position, destination_position) {
 
 
-	let start_position = 1;
-	let destination_position = 9;
-	let game = new GameGrid(10, start_position, destination_position);
+	let game = new GameGrid(number_of_nodes, start_position, destination_position);
 	game.make_neighbour_grid_with_open_walls();
 	render_nodes(game, "body");
 	game_loop_move_by_button(game);
@@ -52,11 +51,23 @@ function get_neigbors_from_labyrynth_dymentions(nodes) {
 	};
 
 }
-// make_random_labyrinth();
-let arr = []
-for (let i = 1; i <= 9; i++) {
-	arr.push(i);
-}
 // get_neigbors_from_labyrynth_dymentions(arr)
-render_labyrinth_builder()
+let generate_labyrinth_button = document.querySelector("#generate_labyrinth");
+generate_labyrinth_button.addEventListener("click", (ev) => {
+	let number_of_closed_doors = document.querySelector("#number_of_closed_doors").value;
+	let number_of_nodes = document.querySelector("#number_of_nodes").value;
+
+	let start_position = parseInt(document.querySelector("#start_position").value);
+	let destination_position = parseInt(document.querySelector("#destination_position").value);
+	// if (number_of_nodes === "" || number_of_closed_doors === "") {
+	// 	alert("Enter number ")
+	// }
+	console.log(number_of_closed_doors, number_of_nodes)
+	try {
+		make_random_labyrinth(number_of_nodes, 1, start_position, destination_position)
+	} catch (er) {
+		alert(er)
+	}
+});
+// render_labyrinth_builder()
 
