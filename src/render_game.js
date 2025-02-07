@@ -231,14 +231,13 @@ export function render_incode_button(game, parentElement) {
 		existingForm.remove();
 	}
 
-	// Додайте HTML форми
-	parent_element.innerHTML += `
-  <div id="generate_labyrinth_form" class="copy_labyrynth_form">
-    <br/>
-    <button id="copy_labyrynth_code" value="none">Неможливо скопіювати код лабіринту</button>
-  </div>
-  `;
-
+	let formHTML = `
+        <div id="generate_labyrinth_form" class="copy_labyrynth_form">
+            <br/>
+            <button id="copy_labyrynth_code" value="none">Cкопіювати код лабіринту</button>
+        </div>
+	    `;
+	parent_element.insertAdjacentHTML('afterend', formHTML);
 	// Виберіть кнопку копіювання та встановіть її значення на закодований об'єкт гри
 	let copy_labyrynth_code = document.querySelector("#copy_labyrynth_code");
 	copy_labyrynth_code.value = incode(game);
@@ -252,7 +251,7 @@ export function render_incode_button(game, parentElement) {
 /**
  * @param {GameGrid} game
  */
-export function toggle_doors_byuit_labytynth(game) {
+export function toggle_doors_byuit_labytynth(game,element_to_append = "body") {
 
 	let move_buttons = document.querySelectorAll(".neighbour_path");
 	move_buttons.forEach((move_button) => {
@@ -268,9 +267,9 @@ export function toggle_doors_byuit_labytynth(game) {
 
 
 			//NOTE: to rerender game board and attach EventListener
-			render_nodes_door_access_visible(game, "body");
-			render_incode_button(game, "body");
+			render_nodes_door_access_visible(game, element_to_append);
 			toggle_doors_byuit_labytynth(game);
+			render_incode_button(game, element_to_append);
 			// move_button.classList.add("path_closed");
 		});
 	});
