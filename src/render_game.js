@@ -98,8 +98,7 @@ export function render_nodes_door_access_visible(game, element_to_append = "body
 	// Check if the grid already exists
 	let existingGrid = document.querySelector("#grid");
 	if (existingGrid) {
-		// Remove the existing grid
-		parentElement.removeChild(existingGrid);
+		existingGrid.parentNode?.removeChild(existingGrid);
 	}
 
 	const grid = document.createElement("div");
@@ -251,7 +250,7 @@ export function render_incode_button(game, parentElement) {
 /**
  * @param {GameGrid} game
  */
-export function toggle_doors_byuit_labytynth(game,element_to_append = "body") {
+export function toggle_doors_byuit_labytynth(game, element_to_append = "body") {
 
 	let move_buttons = document.querySelectorAll(".neighbour_path");
 	move_buttons.forEach((move_button) => {
